@@ -100,7 +100,7 @@ if __name__ == "__main__":
     args = parser.parse_args(None)
 
     ## Grab $HOME path
-    HOME = os.environ('HOME')
+    HOME = os.environ['HOME']
 
     ## Kernels are stored here
     ## See http://www.nersc.gov/users/data-analytics/data-analytics-2/jupyter-and-rstudio/
