@@ -59,7 +59,7 @@ def create_json(path, kernelname):
     PYTHONPATH = os.environ['PYTHONPATH']
     PATH = os.environ['PATH']
 
-    filename = 'kernel.json'
+    filename = os.path.join(path, 'kernel.json')
     with open(filename, 'w') as f:
         print('{', file=f)
         print('  "display_name": "{}",'.format(kernelname), file=f)
@@ -109,3 +109,5 @@ if __name__ == "__main__":
     ## Create the path, and store the kernel
     safe_mkdir(path, verbose=True)
     create_json(path, args.kernelname)
+
+    print("Kernel at {}".format(os.path.join(path, args.kernelname)))
