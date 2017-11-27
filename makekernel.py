@@ -110,4 +110,4 @@ if __name__ == "__main__":
     safe_mkdir(path, verbose=True)
     create_json(path, args.kernelname)
 
-    print("Kernel at {}".format(os.path.join(path, args.kernelname)))
+    print("Kernel at {}".format(path))
