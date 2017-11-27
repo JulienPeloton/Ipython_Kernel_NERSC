@@ -7,7 +7,7 @@ The package
 
 Create custom IPython kernels for using jupyter notebooks at NERSC.
 
-Why do I need this script?
+Why would you need this script?
 ===============
 
 When you try to connect to jupyter-dev, it will read your JUPYTER_PATH.
