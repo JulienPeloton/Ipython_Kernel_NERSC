@@ -28,10 +28,22 @@ paths of jupyter-dev, you will not be able to connect. If you encounter such pro
     fi
 
 * By doing so, if you connect to jupyter-dev (cori19), you won't load all your custom packages. However, if you connect to cori, you will load everything as usual.
-* Then on cori, run the script makekernel.py and create a kernel with all your paths:
+* Then on cori, run the script makekernel.py and create a kernel with all your custom paths:
 
 ::
 
-    python makekernel.py -kernelname mykernel
+    python makekernel.py -kernelname mykernel -py_version 2.7
 
-* Connect to https://jupyter-dev.nersc.gov/hub/login and create a notebook with the kernel `mykernel` you just created (which contains all your favourite paths).
+or
+
+::
+
+    python makekernel.py -kernelname mykernel -py_version 3.6
+
+* It will set the $LD_LIBRARY_PATH, $PYTHONPATH, and $PATH. You can choose python2.7 or python3.6 (latest anaconda-4.4).
+* Connect to https://jupyter-dev.nersc.gov/hub/login and create a notebook with the kernel mykernel${py_version} you just created (which contains all your favourite paths).
+
+Other usage
+===============
+
+It is easy to modify the script to generate any kind of custom kernels. Feel free to edit it!

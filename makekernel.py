@@ -43,7 +43,7 @@ def safe_mkdir(path, verbose=False):
         if verbose:
             print("Folders {} already exist. Not created.".format(path))
 
-def create_json(path, kernelname):
+def create_json(path, kernelname, py_version):
     """
     Create submission file for the software xpure
 
@@ -62,10 +62,11 @@ def create_json(path, kernelname):
     filename = os.path.join(path, 'kernel.json')
     with open(filename, 'w') as f:
         print('{', file=f)
-        print('  "display_name": "{}",'.format(kernelname), file=f)
+        print('  "display_name": "{}{}",'.format(
+            kernelname, py_version), file=f)
         print('  "language": "python",', file=f)
         print('  "argv": [', file=f)
-        print('    "/global/common/cori/software/python/2.7-anaconda/bin/python",', file=f)
+        print('    "/global/common/cori/software/python/{}-anaconda-4.4/bin/python",'.format(py_version), file=f)
         print('    "-m",', file=f)
         print('    "ipykernel",', file=f)
         print('    "-f",', file=f)
@@ -88,6 +89,10 @@ def addargs(parser):
         '-kernelname', dest='kernelname',
         required=True,
         help='Name of the IPython kernel')
+    parser.add_argument(
+        '-py_version', dest='py_version',
+        required=True,
+        help='Version of python (2.7 or 3.6)')
 
 
 if __name__ == "__main__":
@@ -104,10 +109,11 @@ if __name__ == "__main__":
 
     ## Kernels are stored here
     ## See http://www.nersc.gov/users/data-analytics/data-analytics-2/jupyter-and-rstudio/
-    path = '{}/.ipython/kernels/{}'.format(HOME, args.kernelname)
+    path = '{}/.ipython/kernels/{}{}'.format(
+        HOME, args.kernelname, args.py_version)
 
     ## Create the path, and store the kernel
     safe_mkdir(path, verbose=True)
-    create_json(path, args.kernelname)
+    create_json(path, args.kernelname, args.py_version)
 
     print("Kernel at {}".format(path))
